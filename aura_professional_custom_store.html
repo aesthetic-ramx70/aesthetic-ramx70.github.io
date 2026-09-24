@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AURA — Fashion Store</title>
+<style>
+:root{--accent:#111;--soft:#f6f4f1;--card:#fff;--text:#181818;--muted:#737373;--line:#e8e6e3}
+*{box-sizing:border-box}body{margin:0;background:#faf9f7;color:var(--text);font-family:Inter,Arial,sans-serif}
+header{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.nav{max-width:1100px;margin:auto;padding:18px 20px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:23px;font-weight:800;letter-spacing:3px}.tag{font-size:12px;color:var(--muted)}
+.hero{max-width:1100px;margin:28px auto 18px;padding:0 20px}.heroBox{background:var(--soft);border-radius:24px;padding:38px 28px}.eyebrow{text-transform:uppercase;letter-spacing:2px;font-size:11px;color:var(--muted)}h1{font-size:clamp(30px,6vw,56px);line-height:1;margin:10px 0}.hero p{max-width:560px;color:var(--muted);line-height:1.6}
+.wrap{max-width:1100px;margin:20px auto;padding:0 20px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}.card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:0 10px 35px #00000008}
+.photo{aspect-ratio:1/1;background:#eee;border-radius:16px;display:flex;align-items:center;justify-content:center;overflow:hidden}.photo img{width:100%;height:100%;object-fit:cover}.placeholder{text-align:center;color:#888;padding:25px}
+h2{font-size:21px;margin:20px 0 7px}.price{font-size:27px;font-weight:800}.old{text-decoration:line-through;color:#999;font-size:14px;margin-left:7px}.meta{color:var(--muted);font-size:13px;line-height:1.6;margin-top:8px}
+label{display:block;font-size:13px;font-weight:700;margin:15px 0 7px}input,select,textarea{width:100%;padding:13px;border:1px solid #d8d6d2;border-radius:11px;font:inherit;background:#fff}textarea{min-height:90px;resize:vertical}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.total{background:#f7f6f4;border-radius:13px;padding:15px;margin-top:18px;line-height:1.8;font-size:14px}.total b{font-size:18px}
+button{width:100%;padding:14px;border:0;border-radius:12px;margin-top:13px;font-weight:800;font-size:15px;cursor:pointer}.primary{background:var(--accent);color:white}.secondary{background:#efede9;color:#111}.note{font-size:11px;color:#888;line-height:1.5;margin-top:12px}
+.success{display:none;background:#eaf7ee;color:#176438;padding:12px;border-radius:10px;margin-top:12px;font-size:13px}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}.feature{background:#fff;border:1px solid var(--line);border-radius:15px;padding:15px;font-size:13px}.feature b{display:block;margin-bottom:4px}
+footer{text-align:center;color:#888;font-size:12px;padding:35px 20px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.features{grid-template-columns:1fr 1fr}.nav{padding:15px}.hero,.wrap{padding-left:14px;padding-right:14px}}
+</style>
+</head>
+<body>
+<header><div class="nav"><div class="logo" id="brand">AURA</div><div class="tag" id="tagline">CURATED FASHION</div></div></header>
+
+<section class="hero"><div class="heroBox">
+<div class="eyebrow">NEW COLLECTION</div>
+<h1 id="heroTitle">Simple. Trendy. You.</h1>
+<p id="heroText">Discover carefully selected fashion pieces at an accessible price. Choose your size and colour and place your COD order in a few steps.</p>
+</div></section>
+
+<main class="wrap">
+<div class="features">
+<div class="feature"><b>✓ Easy Ordering</b>Quick size & colour selection</div>
+<div class="feature"><b>✓ Cash on Delivery</b>Pay when your order arrives</div>
+<div class="feature"><b>✓ Customer Support</b>Contact us for order help</div>
+</div>
+
+<div class="grid">
+<section class="card">
+<div class="photo" id="photoBox"><div class="placeholder">YOUR PRODUCT PHOTO<br><small>Change PHOTO_URL in the settings below.</small></div></div>
+<h2 id="productName">Trending Floral Print Short Kurti</h2>
+<div class="price">₹<span id="price">299</span><span class="old" id="oldPrice">₹399</span></div>
+<div class="meta" id="productInfo">Premium-look floral print • Short kurti • Party & college wear</div>
+</section>
+
+<section class="card">
+<h2 style="margin-top:0">Order Details</h2>
+<div class="row">
+<div><label>Size *</label><select id="size"><option value="">Choose size</option><option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select></div>
+<div><label>Colour *</label><select id="color"><option value="">Choose colour</option><option>Black</option><option>Green</option><option>Blue</option><option>Red</option><option>Pink</option></select></div>
+</div>
+<label>Full Name *</label><input id="name" placeholder="Your full name">
+<label>Mobile Number *</label><input id="phone" inputmode="numeric" maxlength="10" placeholder="10-digit mobile number">
+<label>Full Delivery Address *</label><textarea id="address" placeholder="House no., road, village/town, district, state"></textarea>
+<div class="row"><div><label>PIN Code *</label><input id="pin" inputmode="numeric" maxlength="6" placeholder="6-digit PIN"></div>
+<div><label>Quantity</label><select id="qty"><option>1</option><option>2</option><option>3</option><option>4</option></select></div></div>
+<div class="total">Payment: <b>Cash on Delivery</b><br>Total: <b>₹<span id="total">299</span></b></div>
+<button class="primary" onclick="sendOrder()">Place Order</button>
+<button class="secondary" onclick="copyOrder()">Copy Order Details</button>
+<div class="success" id="success">Order details copied.</div>
+<div class="note">Your details are sent to the store through WhatsApp when you place the order. Replace the WhatsApp number in the customization section before publishing.</div>
+</section>
+</div>
+</main>
+<footer id="footer">© 2026 AURA Fashion Store • All rights reserved</footer>
+
+<script>
+/* ================= CUSTOMIZE ONLY THIS SECTION ================= */
+const STORE = {
+ brand: "AURA",
+ tagline: "CURATED FASHION",
+ heroTitle: "Simple. Trendy. You.",
+ heroText: "Discover carefully selected fashion pieces at an accessible price. Choose your size and colour and place your COD order in a few steps.",
+ productName: "Trending Floral Print Short Kurti",
+ price: 299,
+ oldPrice: 399,
+ productInfo: "Premium-look floral print • Short kurti • Party & college wear",
+ photoUrl: "", // Example: "https://your-image-url.com/product.jpg"
+ whatsapp: "91XXXXXXXXXX", // Put your WhatsApp number here, e.g. 919876543210
+};
+/* ============================================================= */
+
+document.getElementById("brand").textContent=STORE.brand;
+document.getElementById("tagline").textContent=STORE.tagline;
+document.getElementById("heroTitle").textContent=STORE.heroTitle;
+document.getElementById("heroText").textContent=STORE.heroText;
+document.getElementById("productName").textContent=STORE.productName;
+document.getElementById("price").textContent=STORE.price;
+document.getElementById("oldPrice").textContent=STORE.oldPrice?"₹"+STORE.oldPrice:"";
+document.getElementById("productInfo").textContent=STORE.productInfo;
+document.getElementById("footer").textContent="© 2026 "+STORE.brand+" • All rights reserved";
+if(STORE.photoUrl){document.getElementById("photoBox").innerHTML='<img src="'+STORE.photoUrl+'" alt="'+STORE.productName+'">';}
+function v(id){return document.getElementById(id).value.trim();}
+function makeOrder(){const q=Number(v("qty")||1);return `NEW ORDER\n\nStore: ${STORE.brand}\nProduct: ${STORE.productName}\nSize: ${v("size")}\nColour: ${v("color")}\nQuantity: ${q}\nCustomer: ${v("name")}\nMobile: ${v("phone")}\nAddress: ${v("address")}\nPIN: ${v("pin")}\nPayment: Cash on Delivery\nTotal: ₹${STORE.price*q}`;}
+function valid(){if(!v("size")||!v("color")||!v("name")||!v("phone")||!v("address")||!v("pin")){alert("Please fill all required details.");return false}if(!/^[0-9]{10}$/.test(v("phone"))){alert("Enter a valid 10-digit mobile number.");return false}if(!/^[0-9]{6}$/.test(v("pin"))){alert("Enter a valid 6-digit PIN.");return false}return true}
+function sendOrder(){if(!valid())return;if(STORE.whatsapp.includes("X")){alert("First add your WhatsApp number in the CUSTOMIZE section.");return}window.open("https://wa.me/"+STORE.whatsapp+"?text="+encodeURIComponent(makeOrder()),"_blank")}
+async function copyOrder(){if(!valid())return;await navigator.clipboard.writeText(makeOrder());document.getElementById("success").style.display="block";setTimeout(()=>document.getElementById("success").style.display="none",2500)}
+document.getElementById("qty").addEventListener("change",()=>document.getElementById("total").textContent=STORE.price*Number(v("qty")||1));
+</script>
+</body>
+</html>
